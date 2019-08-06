@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>serenity-bdd-guides</groupId>
+	<artifactId>serenity-bdd-072019</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<properties>
+		<serenity.version>2.0.55</serenity.version>
+		<serenity.maven.version>2.0.55</serenity.maven.version>
+		<serenity.cucumber.version>1.9.30</serenity.cucumber.version>
+		<serenity.report.resources.version>2.0.55</serenity.report.resources.version>
+		<serenity.cucumber.archetype.version>1.8.4</serenity.cucumber.archetype.version>
+		<serenity.junit.archetype.version>1.8.4</serenity.junit.archetype.version>
+		<parallel.tests>1</parallel.tests>
+		<encoding>UTF-8</encoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+			<version>[${serenity.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit</artifactId>
+			<version>[${serenity.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-cucumber</artifactId>
+			<version>[${serenity.cucumber.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-report-resources</artifactId>
+			<version>[${serenity.report.resources.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-cucumber-archetype</artifactId>
+			<version>[${serenity.cucumber.archetype.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-junit-archetype</artifactId>
+			<version>[${serenity.junit.archetype.version}]</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.2</version>
+				<configuration>
+					<includes>
+						<include>**/CucumberTestSuite.java</include>
+					</includes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>net.serenity-bdd.maven.plugins</groupId>
+				<artifactId>serenity-maven-plugin</artifactId>
+				<version>${serenity.maven.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>net.serenity-bdd</groupId>
+						<artifactId>serenity-core</artifactId>
+						<version>[${serenity.version}]</version>
+					</dependency>
+				</dependencies>
+
+				<executions>
+					<execution>
+						<id>serenity-reports</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+
+						<configuration>
+							<outputDirectory>C:/Users/sangrove/IdeaProjects/cucumber/Report - ${current.time}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>current-time</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+						<configuration>
+							<name>current.time</name>
+							<pattern>dd-MM-yyyy_HH-mm-ss</pattern>
+							<timeZone>IST</timeZone>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>7</source>
+					<target>7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
