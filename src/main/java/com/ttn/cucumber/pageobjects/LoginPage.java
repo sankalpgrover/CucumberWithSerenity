@@ -1,25 +1,24 @@
 package com.ttn.cucumber.pageobjects;
 
-import net.thucydides.core.annotations.Step;
-import org.openqa.selenium.WebDriver;
+import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
-    WebDriver driver = WebDriverSetup.driver;
+public class LoginPage extends PageObject {
 
-    public LoginPage() {
-        PageFactory.initElements(driver , this);
-    }
 
-    @FindBy(how = How.NAME, using = "email")
-    private WebElement emailInput;
+    @FindBy(how = How.ID, using = "login-email")
+    public static WebElement userName;
 
-    public void submitMail(){
-        System.out.println("Driver value inside LoginPage: "+driver);
-        emailInput.sendKeys("sankalpgrover@gmail.com");
-    }
+    @FindBy(how = How.ID, using = "login-pwd")
+    public static WebElement password;
+
+    @FindBy(how = How.ID, using = "btn-login")
+    public static WebElement submitButton;
+
+    @FindBy(how = How.NAME, using = "signin-parent")
+    public static WebElement signIn;
+
 
 }

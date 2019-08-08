@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>serenity-bdd-guides</groupId>
+	<groupId>serenity-cucumber</groupId>
 	<artifactId>serenity-bdd-072019</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -115,10 +115,6 @@
 						<goals>
 							<goal>aggregate</goal>
 						</goals>
-
-						<configuration>
-							<outputDirectory>C:/Users/sangrove/IdeaProjects/cucumber/Report - ${current.time}</outputDirectory>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

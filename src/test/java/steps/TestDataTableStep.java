@@ -1,22 +1,37 @@
 package steps;
 
-import com.ttn.stepdefinition.Hooks;
+import com.ttn.cucumber.pageobjects.LoginPage;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.WebDriver;
 
 public class TestDataTableStep {
 
-    WebDriver driver= Hooks.driver;
 
     @Step
-    public void abc(){
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>");
-        driver.get("https://www.google.com");
+    public void navigateToUrl(WebDriver driver) {
+        driver.navigate().to("https://www.jabong.com/");
     }
 
     @Step
-    public void def(){
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>");
-        driver.get("https://www.facebook.com");
+    public void submitUserId(String userId){
+        LoginPage.userName.clear();
+        LoginPage.userName.sendKeys(userId);
     }
+
+    @Step
+    public void submitPassword(String password){
+        LoginPage.password.clear();
+        LoginPage.password.sendKeys(password);
+    }
+
+    @Step
+    public void hitSubmitButton(){
+        LoginPage.submitButton.click();
+    }
+
+    @Step
+    public void clcikSignIn(){
+        LoginPage.signIn.click();
+    }
+
 }

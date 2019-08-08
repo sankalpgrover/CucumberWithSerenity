@@ -1,54 +1,58 @@
 package com.ttn.stepdefinition;
 
-import com.ttn.cucumber.pageobjects.LoginPage;
+import com.ttn.cucumber.pageobjects.GmailHomePage;
+import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import steps.ScenarioOutlineStep;
 
-public class ScenarioOutline {
+public class ScenarioOutline extends GmailHomePage {
 	@Steps
 	ScenarioOutlineStep scenarioOutlineStep;
 
-	 WebDriver driver = Hooks.driver;
+	@Managed
+	WebDriver driver;
 
 	@Given("^I am on Gmail homepage$")
 	public void i_am_on_Gmail_homepage() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		//driver.navigate().to("https://www.google.com");
-		//Thread.sleep(5000);
-		// Add Extent logging for each step
-		scenarioOutlineStep.def();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	scenarioOutlineStep.navigateToUrl(driver);
 	}
 
 	@When("^I will login with Username \"(.*?)\" and Password \"(.*?)\"$")
-	public void i_will_login_with_and(String arg1, String arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		scenarioOutlineStep.def();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	public void i_will_login_with_and(String userName, String passWord) throws Throwable {
+	scenarioOutlineStep.submitUserId(userName);
+		scenarioOutlineStep.clickNextOnUserName();
+		scenarioOutlineStep.submitPassword(passWord);
 
 	}
 
 	@When("^I will click on Submit button$")
 	public void i_will_click_on_Submit_button() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		scenarioOutlineStep.def();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		Assert.fail("+++++++++++++++++++++++++++++++++");
+		scenarioOutlineStep.clickNextOnPassword();
 	}
 
 	@Then("^Verify that user lands onto homepage$")
 	public void verify_that_user_lands_onto_homepage() throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		scenarioOutlineStep.def();
-		System.out.println("I am on homepage");
 
+		System.out.println("Can't login due to bad credentials");
+	}
+
+	@Given("^Delete All Cookies$")
+	public void delete_All_Cookies() {
+
+	}
+
+	@When("^I reload the url$")
+	public void i_reload_the_url() throws InterruptedException {
+		scenarioOutlineStep.navigateToUrl(driver);
+	}
+
+	@Then("^I should land on to Gmail Home Page$")
+	public void i_should_land_on_to_Gmail_Home_Page() {
+//		System.out.println("Gmail Home Page !! It is....");
 	}
 
 }

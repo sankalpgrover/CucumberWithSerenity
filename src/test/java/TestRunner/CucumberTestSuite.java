@@ -28,7 +28,7 @@ That's why we don't allow it.*/
 //tags = {"@gui," "~@SmokeTest," "~@RegressionTest"} ignores all the scenarios under the tag @SmokeTest and @RegressionTest but executes all those under the tag "@gui.
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = { "resources/features"},
+@CucumberOptions(features = { "features"},
 				 glue = {"com.ttn.stepdefinition"},tags={},
 				strict = true, monochrome = true)
 
